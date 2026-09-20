@@ -10,3 +10,9 @@ test-results/
 
 # Build targets
 target/
+
+# Playwright
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

@@ -1,0 +1,32 @@
+{
+  "name": "automacao-demosite-playwright-web",
+  "version": "1.0.0",
+  "description": "Projeto de automação de testes web do DemoSite utilizando Playwright com javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "report": "playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiagofreitassp/automacao-demosite-playwright-web.git"
+  },
+  "keywords": [],
+  "author": "Tiago Freitas - DEV",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/tiagofreitassp/automacao-demosite-playwright-web/issues"
+  },
+  "homepage": "https://github.com/tiagofreitassp/automacao-demosite-playwright-web#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.2"
+  },
+  "dependencies": {
+    "convert-array-to-csv": "^2.0.0",
+    "dotenv": "^18.0.1",
+    "playwright": "^1.63.0",
+    "xlsx": "^0.18.5"
+  }
+}
