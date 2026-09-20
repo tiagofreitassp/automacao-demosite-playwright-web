@@ -12,19 +12,19 @@ let preencherFormularioPage;
 var num = 0;
 
 for (const lineFromExcel of ExcelDataProvider) {
-    if(lineFromExcel.Execute == 'Sim'){
+    if(lineFromExcel.EXECUTE == 'Sim'){
         test.beforeEach(async ({}, testInfo) => {
             // You can access testInfo.retry in any hook or fixture.
             if (testInfo.retry > 0)
               console.log(`Retrying!`);
         });
 
-        test(`${lineFromExcel.Epico} - ${lineFromExcel.Tarefa} - ${lineFromExcel.Cenario} ${num++}`, 
+        test(`${lineFromExcel.ID} - ${lineFromExcel.CENARIO} ${num++}`, 
             {
                 tag: [
                     '@form',
                     '@regressivo',
-                    '@cenario1'
+                    '@ct01'
                 ],
             }, async ({ page }) => {
 

@@ -96,53 +96,17 @@ Pelo Terminal, CMD ou Git Bash:
 
 * npx playwright test --retries=3
 
-Pelo campo Parâmetros na Tech Store:
-
-* --retries=3
-
 ## Execuções usando parâmetros com TAGs no CMD, Terminal ou Git Bash
 
-Executar apenas os Casos de Testes referentes a 'ct01-recalcular-orcamento-premio.spec.js' em HML1 ou HML2:
+Executar apenas os Casos de Testes referentes a 'ct01-preencher-formulario.spec.js':
 
-* npx playwright test --grep @recalcularCopiaOrcamentoHML1
-* npx playwright test --grep @recalcularCopiaOrcamentoHML2
-
-Executar apenas os Casos de Testes referentes a 'ct02-criar-orcamento-premio.spec.js' em HML1 ou HML2:
-
-* npx playwright test --grep @criarOrcamentoHML1
-* npx playwright test --grep @criarOrcamentoHML2
-
-Executar todos os testes apenas em HML1 ou HML2:
-
-* npx playwright test --grep @hml1
-* npx playwright test --grep @hml2
+* npx playwright test --grep @ct01
+* npx playwright test --grep @regressivo
+* npx playwright test --grep @form
 
 Observações:
     1. O comando --grep é nativo do Playwright e deve ser informando antes da TAG.
     2. No final das execuções, para ver os resultados dos testes, vá na ./test-results/html/index.html.
-
-## Execuções usando Variáveis de Ambiente passadas por parâmetro para escolher qual ambiente executar no CMD, Terminal ou Git Bash
-
-Executar apenas os Casos de Testes referentes a 'ct01-recalcular-orcamento-premio.spec.js' em HML1 ou HML2:
-
-* AMBIENTE=hml1 npx playwright test --grep @recalcularCopiaOrcamentoHML
-* AMBIENTE=hml2 npx playwright test --grep @recalcularCopiaOrcamentoHML
-* AMBIENTE=hml1 npx playwright test ct01-recalcular-orcamento-premio.spec.js --headed
-* AMBIENTE=hml1 npx playwright test ct01-recalcular-orcamento-premio.spec.js
-* AMBIENTE=hml2 npx playwright test ct01-recalcular-orcamento-premio.spec.js --headed
-* AMBIENTE=hml2 npx playwright test ct01-recalcular-orcamento-premio.spec.js
-
-Executar apenas os Casos de Testes referentes a 'ct02-criar-orcamento-premio.spec.js' em HML1 ou HML2:
-
-* AMBIENTE=hml1 npx playwright test --grep @criarOrcamentoHML
-* AMBIENTE=hml2 npx playwright test --grep @criarOrcamentoHML
-* AMBIENTE=hml1 npx playwright test ct02-criar-orcamento-premio.spec.js --headed
-* AMBIENTE=hml1 npx playwright test ct02-criar-orcamento-premio.spec.js
-* AMBIENTE=hml2 npx playwright test ct02-criar-orcamento-premio.spec.js --headed
-* AMBIENTE=hml2 npx playwright test ct02-criar-orcamento-premio.spec.js
-
-Observações:
-   Você deve informar a Variavel de Ambiente antes do comando de execução. Se colocar a variavel depois do comando, o Playwright irá dar erro de Variavel de Ambiente 'undefined'.
 
 ## Informar diretório externo da planilha de cenários e massas
 
