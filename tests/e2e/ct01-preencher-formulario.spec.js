@@ -13,6 +13,22 @@ var num = 0;
 
 for (const lineFromExcel of ExcelDataProvider) {
     if(lineFromExcel.Execute == 'Sim'){
-        //
+        test.beforeEach(async ({}, testInfo) => {
+            // You can access testInfo.retry in any hook or fixture.
+            if (testInfo.retry > 0)
+              console.log(`Retrying!`);
+        });
+
+        test(`${lineFromExcel.Epico} - ${lineFromExcel.Tarefa} - ${lineFromExcel.Cenario} ${num++}`, 
+            {
+                tag: [
+                    '@form',
+                    '@regressivo',
+                    '@cenario1'
+                ],
+            }, async ({ page }) => {
+
+            preencherFormularioPage = new PreencherFormularioPage(page);
+        });
     }
 }
