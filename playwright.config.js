@@ -55,18 +55,18 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'],
-        viewport: {width: 1280, height: 720},//O Playwright não trabalha com Maximizar
+      name: 'edge',
+      use: {
+        // Supported Microsoft Edge channels are: msedge, msedge-beta, msedge-dev, msedge-canary
+        channel: 'msedge',
       },
     },
 
     /*
     {
-      name: 'edge',
-      use: {
-        // Supported Microsoft Edge channels are: msedge, msedge-beta, msedge-dev, msedge-canary
-        channel: 'msedge',
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'],
+        viewport: {width: 1280, height: 720},//O Playwright não trabalha com Maximizar
       },
     },
 
