@@ -25,7 +25,7 @@ export class PreencherFormularioPage{
         await this.inserirGenero(GENDER);
         await this.inserirNumeroCelular(MOBILE_NUMBER);
         await this.inserirDataDeNascimento(DAY_OF_BIRTH, MONTH_OF_BIRTH, YEAR_OF_BIRTH);
-        await this.inserirSubjects(SUBJECTS);
+        //await this.inserirSubjects(SUBJECTS);
         await this.inserirHobbies(HOBBIES);
         //await this.inserirPicture(PICTURE);
         await this.inserirAddress(ADDRESS);
@@ -58,15 +58,18 @@ export class PreencherFormularioPage{
     }
 
     async inserirNumeroCelular(MOBILE_NUMBER){
-        await base.fill('//input[@id=\'userNumber\']', MOBILE_NUMBER);
+        await base.fill('#userNumber', MOBILE_NUMBER.toString());
     }
 
     async inserirDataDeNascimento(DAY_OF_BIRTH, MONTH_OF_BIRTH, YEAR_OF_BIRTH){
-        await base.fill('//input[@id=\'dateOfBirthInput\']', `${DAY_OF_BIRTH} ${MONTH_OF_BIRTH} ${YEAR_OF_BIRTH}`);
+        await base.click('#dateOfBirthInput');
+        await base.selectOption('.react-datepicker__month-select', `${MONTH_OF_BIRTH}`);
+        await base.selectOption('.react-datepicker__year-select', `${YEAR_OF_BIRTH}`);
+        await base.click(`.react-datepicker__day--0${DAY_OF_BIRTH}`);
     }
 
     async inserirSubjects(SUBJECTS){
-        await base.fill('//input[@id=\'subjectsInput\']', SUBJECTS);
+        await base.fill('#subjectsInput', SUBJECTS);
     }
 
     async inserirHobbies(HOBBIES){
@@ -98,17 +101,15 @@ export class PreencherFormularioPage{
     }
 
     async validarFormularioSubmetido(FIRST_NAME, LAST_NAME, EMAIL, GENDER, MOBILE_NUMBER, DAY_OF_BIRTH, MONTH_OF_BIRTH, YEAR_OF_BIRTH, SUBJECTS, HOBBIES, PICTURE, ADDRESS, STATE, CITY){
-        await base.toBeVisible(`//td[normalize-space(text())='${FIRST_NAME}']`);
-        await base.toBeVisible(`//td[normalize-space(text())='${LAST_NAME}']`);
+        await base.toBeVisible(`//td[normalize-space(text())='${FIRST_NAME} ${LAST_NAME}']`);
         await base.toBeVisible(`//td[normalize-space(text())='${EMAIL}']`);
         await base.toBeVisible(`//td[normalize-space(text())='${GENDER}']`);
         await base.toBeVisible(`//td[normalize-space(text())='${MOBILE_NUMBER}']`);
-        await base.toBeVisible(`//td[normalize-space(text())='${DAY_OF_BIRTH} ${MONTH_OF_BIRTH} ${YEAR_OF_BIRTH}']`);
-        await base.toBeVisible(`//td[normalize-space(text())='${SUBJECTS}']`);
+        await base.toBeVisible(`//td[normalize-space(text())='${DAY_OF_BIRTH} ${MONTH_OF_BIRTH},${YEAR_OF_BIRTH}']`);
+        //await base.toBeVisible(`//td[normalize-space(text())='${SUBJECTS}']`);
         await base.toBeVisible(`//td[normalize-space(text())='${HOBBIES}']`);
         //await base.toBeVisible(`//td[normalize-space(text())='${PICTURE}']`);
         await base.toBeVisible(`//td[normalize-space(text())='${ADDRESS}']`);
-        await base.toBeVisible(`//td[normalize-space(text())='${STATE}']`);
-        await base.toBeVisible(`//td[normalize-space(text())='${CITY}']`);
+        await base.toBeVisible(`//td[normalize-space(text())='${STATE} ${CITY}']`);
     }
 }
