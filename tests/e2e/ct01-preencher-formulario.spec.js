@@ -29,6 +29,7 @@ for (const lineFromExcel of ExcelDataProvider) {
             }, async ({ page }) => {
 
             preencherFormularioPage = new PreencherFormularioPage(page);
+            await preencherFormularioPage.abrirNavegador(process.env.BASE_URL);
         });
     }
 }
