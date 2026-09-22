@@ -39,3 +39,45 @@ export function readDataFromExcelFile(dirName, tabNumber) {
   const dataFromFirstSheet = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[tabNumber]]);
   return dataFromFirstSheet;
 }
+
+export async function writeTestResultToExcel(dirName, tabNumber, matchColumnName, matchValue, status, errorText) {
+  const baseFolder = typeof dirName !== 'undefined' ? dirName + pathMod.sep : excelFolderPath;
+  const fullPath = baseFolder + process.env.NOME_PLANILHA;
+  if (!fs.existsSync(fullPath)) throw new Error(`Arquivo não encontrado: ${fullPath}`);
+
+  const lockPath = fullPath + '.lock';
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  let attempts = 0;
+  while (fs.existsSync(lockPath) && attempts < 50) { await wait(100); attempts++; }
+  try {
+    fs.writeFileSync(lockPath, String(process.pid));
+
+    const workbook = XLSX.readFile(fullPath);
+    const sheetName = workbook.SheetNames[tabNumber];
+    const sheet = workbook.Sheets[sheetName];
+
+    const rowsHeader = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+    const headers = rowsHeader[0] ? [...rowsHeader[0]] : [];
+
+    const dataObjects = XLSX.utils.sheet_to_json(sheet);
+
+    if (!headers.includes('STATUS')) headers.push('STATUS');
+    if (!headers.includes('ERRO')) headers.push('ERRO');
+
+    const idx = dataObjects.findIndex(r => String(r[matchColumnName]) === String(matchValue));
+
+    if (idx >= 0) {
+      dataObjects[idx]['STATUS'] = status;
+      dataObjects[idx]['ERRO'] = errorText || '';
+    } else {
+      const newRow = { [matchColumnName]: matchValue, STATUS: status, ERRO: errorText || '' };
+      dataObjects.push(newRow);
+    }
+
+    const newSheet = XLSX.utils.json_to_sheet(dataObjects, { header: headers });
+    workbook.Sheets[sheetName] = newSheet;
+    XLSX.writeFile(workbook, fullPath);
+  } finally {
+    try { fs.unlinkSync(lockPath); } catch (e) {}
+  }
+}
