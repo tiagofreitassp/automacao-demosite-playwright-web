@@ -42,15 +42,15 @@ export class PreencherFormularioPage{
     }
 
     async inserirPrimeiroNome(FIRST_NAME){
-        await base.fill('//input[@id=\'firstName\']', FIRST_NAME);
+        await base.fill('#firstName', FIRST_NAME);
     }
-    
+
     async inserirUltimoNome(LAST_NAME){
-        await base.fill('//input[@id=\'lastName\']', LAST_NAME);
+        await base.fill('#lastName', LAST_NAME);
     }
-    
+
     async inserirEmail(EMAIL){
-        await base.fill('//input[@id=\'userEmail\']', EMAIL);
+        await base.fill('#userEmail', EMAIL);
     }
 
     async inserirGenero(GENDER){
